@@ -1,32 +1,35 @@
-//==============================
-import java.util.Random;
-//package bone4;
-
 public class DungeonCharacter {
-	//declares variables
+	// Declares properties of the class
+	// ------------------------------------------------------------------------
+	// ------------------------------------------------------------------------
 	private String name;
+	private int healthMax;
 	private int health;
-	//variable for normAtk and specialAtk
-	private Random ran = new Random();
 	
-	// these variables didn't need to be set for setters/getters because they do not interact with Dungeon.java; used inside the class only
+	// Variable for normAtk and specialAtk
 	private int nMinAttack;
 	private int nMaxAttack;
 	private int sMinAttack;
 	private int sMaxAttack;
 	
-	//create constructor
+	
+	// Constructor
+	// ------------------------------------------------------------------------
+	// ------------------------------------------------------------------------
 	public DungeonCharacter(String argName, int argHealth, int argNormalMinAtk, int argNormalMaxAtk, int argSpecialMinAtk, int argSpecialMaxAtk) {
 		this.name = argName;
+		this.healthMax = argHealth;
 		this.health = argHealth;
 		this.nMinAttack = argNormalMinAtk;
 		this.nMaxAttack = argNormalMaxAtk;
 		this.sMinAttack = argSpecialMinAtk;
 		this.sMaxAttack = argSpecialMaxAtk;
-	}//end constructor
+	}
 
 	
-	//getters and setters for variables
+	// Getters and Setters
+	// ------------------------------------------------------------------------
+	// ------------------------------------------------------------------------
 	public String getName() {
 		return name;
 	}
@@ -41,32 +44,31 @@ public class DungeonCharacter {
 	}
 	
 
-	//att damage to other actor
+	// Battle Methods
+	// ------------------------------------------------------------------------
+	// ------------------------------------------------------------------------
 	public void takeDamage(int damage) {
 		health = health - damage;
 	}
-	
 	public boolean isDead() {
 		return this.health <= 0;
 	}
+	public boolean isAlive() {
+		return this.health > 0;
+	}
 	
-	//method to show current name and health
-	public void displayNameAndHealth() {
-		System.out.println(name +" health is " + health);
-	}//end displayNameAndHealth
-
-	public int normalAtk() {
-		/*
-		ran.nextInt(20); // 0 - 20
-		ran.nextInt(20)+1; // 1 - 20
-		*/
+	public int normalAttack() {
 		// Cast the return double data type to int
 		return (int) Math.round( (Math.random() * ( this.nMaxAttack - this.nMinAttack)) + this.nMinAttack );
 	}
-	public int specialAtk() {
+	public int specialAttack() {
 		// Cast the return double data type to int
 		return (int) Math.round( (Math.random() * ( this.sMaxAttack - this.sMinAttack )) + this.sMinAttack );
 	}
 	
-	
-}//end class
+	public String healthStatus() {
+		// Returns example string "100/100"
+		return this.health + "/" + this.healthMax;
+	}
+
+}
